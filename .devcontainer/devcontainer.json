@@ -1,0 +1,27 @@
+{
+  "name": "cpp-engine-dev",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "bash",
+
+    "C_Cpp.default.compilerPath": "/usr/bin/g++",
+    "C_Cpp.intelliSenseEngine": "default",
+
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4
+  },
+  "extensions": [
+    "ms-vscode.cpptools",
+    "ms-vscode.cpptools-extension-pack",
+    "llvm-vs-code-extensions.vscode-clangd",
+    "twxs.cmake",
+    "ms-vscode.cmake-tools",
+    "vadimcn.vscode-lldb",
+    "ms-azuretools.vscode-docker"
+  ],
+  "remoteUser": "root"
+}
