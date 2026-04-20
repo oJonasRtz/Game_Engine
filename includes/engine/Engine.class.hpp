@@ -11,14 +11,21 @@ class Engine {
 		Engine() = delete;
 		~Engine() = delete;
 
+		// === Engine state ===
 		static bool isRunning;
 		static bool isPaused;
-		static std::string name;
 		static Window* window;
 
+		// === Game information ===
+		static std::string gameName;
+		static std::string gameVersion;
+
+		// == Engine information ===
+		static std::string engineName;
+		static std::string engineVersion;
+		
+		// === Private methods ===
 		static void gameLoop();
-
-
 	public:
 		/**
 		 * Starts the game engine with the specified game name. If the engine is already running, it will print a warning message.
@@ -41,6 +48,12 @@ class Engine {
 		 * 
 		*/
 		static void exit();
+
+		// === Getters ===
+		static const std::string& getGameName() { return Engine::gameName; }
+		static const std::string& getGameVersion() { return Engine::gameVersion; }
+		static const std::string& getEngineName() { return Engine::engineName; }
+		static const std::string& getEngineVersion() { return Engine::engineVersion; }
 };
 
 #endif // ENGINE_CLASS_CPP

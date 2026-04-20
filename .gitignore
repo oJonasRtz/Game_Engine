@@ -3,8 +3,9 @@
 !*.cpp
 !*.hpp
 !Makefile
-!includes
 !src/
 !.gitignore
 !README.md
 !.devcontainer
+!includes/
+!includes/engine/
