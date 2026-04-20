@@ -45,10 +45,15 @@ static int handleCommands(const std::string& command, const std::string& program
 }
 
 int main(int argc, char* argv[]) {
+	
+	// Setting my game information
+	Engine::setGameName("Stray Engine Demo");
+	Engine::setGameVersion("0.1.0");
+
 	if (argc > 1)
 		return handleCommands(argv[1], argv[0]);
 
-	Engine::start("My Awesome Game");
+	Engine::start();
 
 	return 0;
 }

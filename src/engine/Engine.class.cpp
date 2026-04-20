@@ -6,7 +6,7 @@
 #include <chrono>
 
 // === Static member initialization ===
-std::string defaultGameName = "My Game";
+std::string defaultGameName = "My Awesome Game";
 bool Engine::isPaused = false;
 bool Engine::isRunning = false;
 Window* Engine::window = nullptr;
@@ -26,7 +26,7 @@ std::string Engine::engineVersion = "0.0.1";
 
 
 // == Public methods ===
-void Engine::start(const std::string& gameName) {
+void Engine::start() {
 	if (Engine::isRunning) {
 		std::cerr << COLOR_YELLOW << "Warning: Engine is already running!" << COLOR_RESET << std::endl;
 		return;
@@ -34,7 +34,6 @@ void Engine::start(const std::string& gameName) {
 
 	std::cout << COLOR_GREEN << "Starting engine..." << COLOR_RESET << std::endl;
 
-	Engine::gameName = gameName.empty() ? defaultGameName : gameName;
 	Engine::isRunning = true;
 	Engine::window = new Window(Engine::gameName);
 

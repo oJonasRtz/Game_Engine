@@ -28,10 +28,9 @@ class Engine {
 		static void gameLoop();
 	public:
 		/**
-		 * Starts the game engine with the specified game name. If the engine is already running, it will print a warning message.
-		 * @param gameName The name of the game to start. If empty, a default name will be used.
-		*/
-		static void start(const std::string& gameName);
+		 * Starts the game engine. If the engine is already running, it will print a warning message.
+		 */
+		static void start();
 		/**
 		 * Resumes the game if it is paused with Engine::stop(). If the engine is not paused, it will print a warning message.
 		 * Note: This method does not start the game loop, it only resumes the game logic
@@ -54,6 +53,10 @@ class Engine {
 		static const std::string& getGameVersion() { return Engine::gameVersion; }
 		static const std::string& getEngineName() { return Engine::engineName; }
 		static const std::string& getEngineVersion() { return Engine::engineVersion; }
+
+		// == Setters ===
+		static void setGameName(const std::string& name) { Engine::gameName = name; }
+		static void setGameVersion(const std::string& version) { Engine::gameVersion = version; }
 };
 
 #endif // ENGINE_CLASS_CPP
