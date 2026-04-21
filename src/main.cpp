@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
 	
 	// Setting my game information
 	Engine::setGameName("Stray Engine Demo");
-	Engine::setGameVersion("0.1.0");
+	Engine::setGameVersion("0.0.3");
 
 	if (argc > 1)
 		return handleCommands(argv[1], argv[0]);

@@ -1,4 +1,4 @@
-#include "../../includes/engine/Window.class.hpp"
+#include "../../includes/engine/Render/Window.class.hpp"
 
 Window::Window(const std::string& title, int width, int height, int fps):
 	title(title.empty() ? DEFAULT_TITLE : title),

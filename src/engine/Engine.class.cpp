@@ -1,5 +1,6 @@
 #include "../../includes/engine/Engine.class.hpp"
-#include "../../includes/engine/Window.class.hpp"
+#include "../../includes/engine/Render/Window.class.hpp"
+#include "../../includes/engine/Render/Renderer.class.hpp"
 
 #include <SDL2/SDL_scancode.h>
 #include <thread>
@@ -69,21 +70,44 @@ void Engine::exit() {
 // == Private methods ===
 void Engine::gameLoop() {
 	SDL_Event event;
+	Render::init(Engine::window);
+
+	auto ONE_SECOND = std::chrono::seconds(1);
+	auto lastTime = std::chrono::high_resolution_clock::now();
+
+	int cnt = 0;
+	int fps_show = 0;
 
 	while (Engine::isRunning) {
-		// Placeholder for game loop logic
-		if (!Engine::isPaused)
-			std::cout << "\r" << COLOR_BLUE << Engine::engineName << " is Running: " << Engine::gameName << COLOR_RESET << std::flush;
-
+		auto now = std::chrono::high_resolution_clock::now();
+		cnt++;
 		// === Events ===
 		while (SDL_PollEvent(&event)) {
-			if (event.type == SDL_QUIT || event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
+			if (event.type == SDL_QUIT)
 				Engine::exit();
+		}
+		
+		// Placeholder for game loop logic
+		if (!Engine::isPaused) {
+			Render::clear();
+			std::cout << "\r"
+					<< Engine::engineName
+					<< " is Running: "
+					<< COLOR_BLUE
+					<< Engine::gameName
+					<< COLOR_RESET
+					<< " | FPS: " << COLOR_YELLOW << fps_show << COLOR_RESET
+					<< std::flush;
+			Render::present();
+		}
 
-			if (event.key.keysym.scancode == SDL_SCANCODE_P)
-				Engine::stop();
-			else if (event.key.keysym.scancode == SDL_SCANCODE_R)
-				Engine::resume();
+		// === Implementar limitador de FPS, vamos deixar um template por enquanto ===
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / 60)); // Simulate ~60 FPS
+
+		if (now - lastTime >= ONE_SECOND) {
+			fps_show = cnt;
+			cnt = 0;
+			lastTime = now;
 		}
 	}
 }
