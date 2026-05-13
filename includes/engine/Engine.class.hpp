@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include "utils.hpp"
+#include <vector>
+#include "./Actor.class.hpp"
 
 class Window;
 
@@ -27,6 +29,7 @@ class Engine {
 		// === Private methods ===
 		static void gameLoop();
 	public:
+		static std::vector<Actor*> actors;
 		/**
 		 * Starts the game engine. If the engine is already running, it will print a warning message.
 		 */

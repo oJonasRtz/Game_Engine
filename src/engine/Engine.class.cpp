@@ -2,8 +2,10 @@
 #include "../../includes/engine/Render/Window.class.hpp"
 #include "../../includes/engine/Render/Renderer.class.hpp"
 
+
+
 #include <SDL2/SDL_scancode.h>
-#include <thread>
+static_assert(__cplusplus >= 201703L, "This project requires C++17 or higher to compile.");
 #include <chrono>
 
 // === Static member initialization ===
@@ -11,6 +13,7 @@ std::string defaultGameName = "My Awesome Game";
 bool Engine::isPaused = false;
 bool Engine::isRunning = false;
 Window* Engine::window = nullptr;
+std::vector<Actor*> Engine::actors;
 
 // === Game and engine information ===
 /*
@@ -78,18 +81,25 @@ void Engine::gameLoop() {
 	int cnt = 0;
 	int fps_show = 0;
 
+	int x = 0;
+
 	while (Engine::isRunning) {
 		auto now = std::chrono::high_resolution_clock::now();
 		cnt++;
+		x = ((x + 5) - 50 >= Engine::window->getWidth()) ? 0 : x + 5;
+
 		// === Events ===
 		while (SDL_PollEvent(&event)) {
-			if (event.type == SDL_QUIT)
+			if (event.type == SDL_QUIT) {
 				Engine::exit();
+				return;
+			}
 		}
 		
 		// Placeholder for game loop logic
 		if (!Engine::isPaused) {
 			Render::clear();
+
 			std::cout << "\r"
 					<< Engine::engineName
 					<< " is Running: "
@@ -98,11 +108,15 @@ void Engine::gameLoop() {
 					<< COLOR_RESET
 					<< " | FPS: " << COLOR_YELLOW << fps_show << COLOR_RESET
 					<< std::flush;
+
+			for (Actor* actor : Engine::actors)
+				actor->tick();
+			
 			Render::present();
 		}
 
 		// === Implementar limitador de FPS, vamos deixar um template por enquanto ===
-		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / 60)); // Simulate ~60 FPS
+		SDL_Delay(1000 / 60); // Simulate ~60 FPS
 
 		if (now - lastTime >= ONE_SECOND) {
 			fps_show = cnt;

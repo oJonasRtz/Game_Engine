@@ -1,11 +1,8 @@
-# Ignore all files except for the ones we want to keep in the repository
-*
-!*.cpp
-!*.hpp
-!Makefile
-!src/
-!.gitignore
-!README.md
-!.devcontainer
-!includes/
-!includes/engine/
+*.o
+*.win.o
+*.deb
+*.zip
+*_win
+*_deb
+*~
+myGame

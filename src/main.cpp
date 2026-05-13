@@ -44,6 +44,8 @@ static int handleCommands(const std::string& command, const std::string& program
 	return 0;
 }
 
+#include "../includes/game/actors/Player.cpp"
+
 int main(int argc, char* argv[]) {
 	
 	// Setting my game information
@@ -53,7 +55,11 @@ int main(int argc, char* argv[]) {
 	if (argc > 1)
 		return handleCommands(argv[1], argv[0]);
 
+	Player* p = new Player();
+
 	Engine::start();
 
+
+	delete p;
 	return 0;
 }
